@@ -81,7 +81,7 @@
     pkgs.libreoffice pkgs.vlc pkgs.xsane pkgs.baobab pkgs.gimp
     pkgs.oh-my-zsh
     pkgs.git
-    pkgs.masterpdfeditor
+#    pkgs.masterpdfeditor
     pkgs.obs-studio
     pkgs.typora
     pkgs.transmission
