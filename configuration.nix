@@ -73,11 +73,24 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
+  nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
-    firefox 
+    pkgs.wget pkgs.terminator pkgs.firefox pkgs.mailspring 
+    pkgs.libreoffice pkgs.vlc pkgs.xsane pkgs.baobab pkgs.gimp
+    pkgs.oh-my-zsh
+    pkgs.git
+    pkgs.masterpdfeditor
+    pkgs.obs-studio
+    pkgs.typora
+    pkgs.transmission
+    pkgs.gnome-themes-extra
+    pkgs.gnome3.gnome-tweak-tool
+    pkgs.gnome3.gnome-shell-extensions
+    pkgs.gnomeExtensions.sound-output-device-chooser
+    pkgs.gnomeExtensions.system-monitor
+    pkgs.gnome3.gnome-bluetooth
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
