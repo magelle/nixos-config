@@ -10,16 +10,9 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the GRUB 2 boot loader.
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  #
-  boot.loader.systemd-boot.enable = true; 
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
-  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -54,11 +47,11 @@
   
 
   # Configure keymap in X11
-  services.xserver.layout = "fr";
+  # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound.
   # sound.enable = true;
@@ -73,15 +66,14 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     pkgs.wget pkgs.terminator pkgs.firefox pkgs.mailspring 
     pkgs.libreoffice pkgs.vlc pkgs.xsane pkgs.baobab pkgs.gimp
     pkgs.oh-my-zsh
     pkgs.git
-#    pkgs.masterpdfeditor
     pkgs.obs-studio
     pkgs.typora
     pkgs.transmission
@@ -95,17 +87,8 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # Program config
   programs.geary.enable = false; # replaced by mailspring
   programs.gnome-terminal.enable = false; # replaced by terminator
- 
-  
 
   # List services that you want to enable:
 
