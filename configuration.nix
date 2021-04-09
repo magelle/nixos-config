@@ -101,6 +101,12 @@
   #   enableSSHSupport = true;
   # };
 
+  # Program config
+  program.geary.enable = false; # replaced by mailspring
+  program.gnome-terminal.enable = false; # replaced by terminator
+ 
+  
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
