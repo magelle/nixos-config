@@ -1,5 +1,5 @@
-#!/bin/bash
-
+#!/bin/sh
+# nix-env -f '<nixpkgs>' -iA git
 
 # Partition the disk
 parted /dev/sda -- mklabel gpt
