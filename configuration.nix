@@ -102,8 +102,8 @@
   # };
 
   # Program config
-  program.geary.enable = false; # replaced by mailspring
-  program.gnome-terminal.enable = false; # replaced by terminator
+  programs.geary.enable = false; # replaced by mailspring
+  programs.gnome-terminal.enable = false; # replaced by terminator
  
   
 
