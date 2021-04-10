@@ -32,3 +32,8 @@ cp ./configuration.nix /mnt/etc/nixos/
 cp ./hardware-configuration.nix /mnt/etc/nixos/
 nixos-install
 
+# Commands
+# build without install : nixos-rebuild build
+# Test the config : nixos-rebuild test
+# Switch to new config without reboot (but make it the default one) : nixos-rebuild switch
+# makethe config the boot default : nixos-rebuild boot
