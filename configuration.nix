@@ -44,7 +44,6 @@
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.desktopManager.xterm.enable = false;
 
   # Configure keymap in X11
   services.xserver.layout = "fr";
@@ -103,7 +102,7 @@
     
     # La foncière
     pkgs.teams
-    pkgs.docker pkgs.docker-compose pkgs.helm pkgs.kubectl pkgs.kubectx
+    pkgs.docker pkgs.docker-compose pkgs.helmfile pkgs.kubectl pkgs.kubectx
     pkgs.postman
     
   ];
