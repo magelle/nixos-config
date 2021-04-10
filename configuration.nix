@@ -44,10 +44,10 @@
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  
+  services.xserver.desktopManager.xterm.enable = false;
 
   # Configure keymap in X11
-  # services.xserver.layout = "us";
+  services.xserver.layout = "fr";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
@@ -61,34 +61,60 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.defaultUserShell = "/run/current-system/sw/bin/zsh";
   users.users.max = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    shell = "/run/current-system/sw/bin/zsh";
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.*
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    pkgs.wget pkgs.terminator pkgs.firefox pkgs.mailspring 
-    pkgs.libreoffice pkgs.vlc pkgs.xsane pkgs.baobab pkgs.gimp
-    pkgs.oh-my-zsh
-    pkgs.git
-    pkgs.obs-studio
-    pkgs.typora
-    pkgs.transmission
+    # CLI tools
+    pkgs.terminator
+    pkgs.wget pkgs.htop pkgs.jq 
+    pkgs.zsh pkgs.oh-my-zsh
+    
+    # Desktop
+    pkgs.firefox pkgs.mailspring
+    pkgs.libreoffice pkgs.wpsoffice
+     #    pkgs.masterpdfeditor
+    pkgs.vlc pkgs.xsane pkgs.baobab pkgs.gimp
+    pkgs.obs-studio pkgs.typora pkgs.transmission
+    # Gnome
     pkgs.gnome-themes-extra
-    pkgs.gnome3.gnome-tweak-tool
-    pkgs.gnome3.gnome-shell-extensions
+    pkgs.gnome3.gnome-tweak-tool pkgs.gnome3.gnome-shell-extensions pkgs.gnome3.gnome-bluetooth
     pkgs.gnomeExtensions.sound-output-device-chooser
     pkgs.gnomeExtensions.system-monitor
-    pkgs.gnome3.gnome-bluetooth
+    
+    
+    # Dev Tools
+    pkgs.git
+    pkgs.yarn
+    pkgs.vscode
+    pkgs.slack
+    pkgs.skype
+    pkgs.elixir 
+    
+    # Dev languages
+    pkgs.openjdk pkgs.maven
+    
+    # La foncière
+    pkgs.teams
+    pkgs.docker pkgs.docker-compose pkgs.helm pkgs.kubectl pkgs.kubectx
+    pkgs.postman
+    
   ];
+  environment.gnome3.excludePackages = [ pkgs.gnome3.epiphany ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
+  programs.zsh.enable = true;
   programs.geary.enable = false; # replaced by mailspring
   programs.gnome-terminal.enable = false; # replaced by terminator
+  
 
   # List services that you want to enable:
 
