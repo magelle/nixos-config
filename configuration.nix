@@ -37,16 +37,19 @@
     keyMap = "fr";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-
   # Enable the GNOME 3 Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
-
+  services.xserver = {
+    enable = true;
+    layout = "fr";
+    displayManager.gdm.enable = true;
+    desktopManager = {
+      gnome3.enable = true;
+      xterm.enable = true;
+    };
+  };
+  
   # Configure keymap in X11
-  services.xserver.layout = "fr";
+  # services.xserver.layout = "fr";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
@@ -72,48 +75,83 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # CLI tools
-    pkgs.terminator
-    pkgs.wget pkgs.htop pkgs.jq 
-    pkgs.zsh pkgs.oh-my-zsh
+    terminator
+    wget jq 
+    zsh oh-my-zsh
+    htop exa bat 
     
     # Desktop
-    pkgs.firefox pkgs.mailspring
-    pkgs.libreoffice pkgs.wpsoffice
-     #    pkgs.masterpdfeditor
-    pkgs.vlc pkgs.xsane pkgs.baobab pkgs.gimp
-    pkgs.obs-studio pkgs.typora pkgs.transmission
+    firefox mailspring
+    libreoffice wpsoffice
+     #    masterpdfeditor
+    vlc xsane baobab gimp
+    obs-studio typora transmission
     # Gnome
-    pkgs.gnome-themes-extra
-    pkgs.gnome3.gnome-tweak-tool pkgs.gnome3.gnome-shell-extensions pkgs.gnome3.gnome-bluetooth
-    pkgs.gnomeExtensions.sound-output-device-chooser
-    pkgs.gnomeExtensions.system-monitor
+    gnome-themes-extra
+    gnome3.gnome-tweak-tool gnome3.gnome-shell-extensions gnome3.gnome-bluetooth
+    gnomeExtensions.sound-output-device-chooser
+    gnomeExtensions.system-monitor
     
     
     # Dev Tools
-    pkgs.git
-    pkgs.yarn
-    pkgs.vscode
-    pkgs.slack
-    pkgs.skype
-    pkgs.elixir 
+    git
+    yarn
+    vscode
+    slack
+    skype
+    elixir 
     
     # Dev languages
-    pkgs.openjdk pkgs.maven
+    openjdk maven
     
     # La foncière
-    pkgs.teams
-    pkgs.docker pkgs.docker-compose pkgs.helmfile pkgs.kubectl pkgs.kubectx
-    pkgs.postman
+    teams
+    docker docker-compose helmfile kubectl kubectx
+    postman
     
   ];
-  environment.gnome3.excludePackages = [ pkgs.gnome3.epiphany ];
+  
+  environment.gnome3.excludePackages = with pkgs; [ 
+    gnome3.epiphany
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.zsh.enable = true;
-  programs.geary.enable = false; # replaced by mailspring
-  programs.gnome-terminal.enable = false; # replaced by terminator
-  
+  programs = {
+    zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      ohMyZsh = {
+        enable = true;
+        plugins = [ 
+          "sudo" "git" "systemd" "common-aliases" "compleat" "zsh-interactive-cd"
+          "git-flow" "yarn" "mvn" "npm" "docker" "docker-compose" "kubectl"
+          "kube-ps1" "helm"
+         ];
+        theme = "agnoster";
+      };
+      shellAliases = {
+        systemctl="sudo systemctl";
+        cat="bat";
+        less="bat";
+        dotnet="TERM=xterm dotnet";
+        lfn="kubeon && cd /home/max/workspace/lafoncierenumerique";
+        ls="exa";
+        top="htop";
+
+        kubectl="kubeon && kubectl";
+        kubectx="kubeon && kubectx";
+        kubens="kubeon && kubens";
+
+        # https://www.atlassian.com/git/tutorials/dotfiles
+        config="git --git-dir=$HOME/.cfg/ --work-tree=$HOME";
+      };
+    };
+    geary.enable = false; # replaced by mailspring
+    gnome-terminal.enable = false; # replaced by terminator
+  };
 
   # List services that you want to enable:
 
