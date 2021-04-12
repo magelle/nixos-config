@@ -78,7 +78,8 @@
     terminator
     wget jq 
     zsh oh-my-zsh
-    htop exa bat 
+    htop exa bat
+    unzip
     
     # Desktop
     firefox mailspring
@@ -91,7 +92,8 @@
     gnome3.gnome-tweak-tool gnome3.gnome-shell-extensions gnome3.gnome-bluetooth
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.system-monitor
-    
+    #gnomeExtensions.topicons-plus
+    gnomeExtensions.clipboard-indicator
     
     # Dev Tools
     git
