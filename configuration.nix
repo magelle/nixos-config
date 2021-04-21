@@ -89,11 +89,15 @@
     obs-studio typora transmission
     # Gnome
     gnome-themes-extra
-    gnome3.gnome-tweak-tool gnome3.gnome-shell-extensions gnome3.gnome-bluetooth
+    gnome3.gnome-tweak-tool
+    gnome3.gnome-shell-extensions
+    gnome3.gnome-bluetooth
+    
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.system-monitor
     #gnomeExtensions.topicons-plus
     gnomeExtensions.clipboard-indicator
+    gnomeExtensions.appindicator
     
     # Dev Tools
     git
@@ -102,6 +106,10 @@
     slack
     skype
     elixir 
+    jetbrains.webstorm
+    jetbrains.idea-ultimate
+    jetbrains.phpstorm
+    jetbrains.rider
     
     # Dev languages
     openjdk maven
@@ -135,6 +143,7 @@
         theme = "agnoster";
       };
       shellAliases = {
+        nixos-rebuild="sudo nixos-rebuild";
         systemctl="sudo systemctl";
         cat="bat";
         less="bat";
