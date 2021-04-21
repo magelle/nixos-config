@@ -8,7 +8,7 @@ parted /dev/sda -- mkpart primary 512MiB 100%
 # parted /dev/sda -- mkpart primary 512MiB -8GiB
 # parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
 parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
-parted /dev/sda set 1 esp on
+parted /dev/sda -- set 2 esp on
 
 # Formating the partitions
 mkfs.ext4 -L nixos /dev/sda1 > part-main.log
