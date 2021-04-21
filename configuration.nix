@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      (import "${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz}/nixos")
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -81,6 +82,9 @@
     htop exa bat
     unzip
     
+    # Nix tools
+    dconf2nix
+    
     # Desktop
     firefox mailspring
     libreoffice wpsoffice
@@ -89,6 +93,7 @@
     obs-studio typora transmission
     # Gnome
     gnome-themes-extra
+    gnome3.dconf-editor
     gnome3.gnome-tweak-tool
     gnome3.gnome-shell-extensions
     gnome3.gnome-bluetooth
@@ -151,6 +156,7 @@
         lfn="kubeon && cd /home/max/workspace/lafoncierenumerique";
         ls="exa";
         top="htop";
+        nix-dconf="dconf dump / | dconf2nix";
 
         kubectl="kubeon && kubectl";
         kubectx="kubeon && kubectx";
@@ -182,6 +188,31 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.max = { pkgs, ... }: {
+    dconf.settings = {
+    
+      "org/gnome/shell" = {
+        "disabled-extensions" = [ "apps-menu@gnome-shell-extensions.gcampax.github.com" ];
+        "enabled-extensions" = [ "system-monitor@paradoxxx.zero.gmail.com" "appindicatorsupport@rgcjonas.gmail.com" "clipboard-indicator@tudmotu.com" "sound-output-device-chooser@kgshank.net" ];
+        "favorite-apps" = [ "terminator.desktop" "firefox.desktop" "mailspring.desktop" "teams.desktop" "org.gnome.Nautilus.desktop" "code.desktop" "idea-ultimate.desktop" "webstorm.desktop" ];
+      };
+      
+      "org/gnome/shell/extensions/system-monitor" = {
+        "compact-display" = true;
+        "cpu-show-text" = false;
+        "cpu-style" = "digit";
+        "disk-style" = "digit";
+        "disk-usage-style" = "bar";
+        "icon-display" = false;
+        "memory-show-text" = false;
+        "memory-style" = "digit";
+        "net-display" = false;
+        "net-style" = "digit";
+      };
+    };
+  };
 
 }
 
