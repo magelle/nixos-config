@@ -200,7 +200,7 @@
       };
       
       "org/gnome/shell/extensions/system-monitor" = {
-        "compact-display" = true;
+        "compact-display" = false;
         "cpu-show-text" = false;
         "cpu-style" = "digit";
         "disk-style" = "digit";
