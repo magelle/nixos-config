@@ -191,6 +191,13 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.users.max = { pkgs, ... }: {
+    programs = {
+      git = {
+        enable = true;
+        userName  = "magelle";
+        userEmail = "maxime.gelle@gmail.com";
+      };
+    };
     dconf.settings = {
     
       "org/gnome/shell" = {
