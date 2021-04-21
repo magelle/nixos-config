@@ -211,6 +211,17 @@
         "net-display" = false;
         "net-style" = "digit";
       };
+      
+      "org/gnome/gedit/preferences/editor" = {
+        "scheme" = "oblivion";
+        "wrap-last-split-mode" = "word";
+      };
+      
+      "org/gnome/desktop/interface" = {
+        "gtk-im-module" = "gtk-im-context-simple";
+        "gtk-theme" = "Adwaita-dark";
+      };
+      
     };
   };
 
