@@ -78,7 +78,7 @@
     # CLI tools
     terminator
     wget jq 
-    zsh oh-my-zsh
+    zsh oh-my-zsh fzf
     htop exa bat
     unzip
     
@@ -191,13 +191,6 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.users.max = { pkgs, ... }: {
-    programs = {
-      git = {
-        enable = true;
-        userName  = "magelle";
-        userEmail = "maxime.gelle@gmail.com";
-      };
-    };
     dconf.settings = {
     
       "org/gnome/shell" = {
